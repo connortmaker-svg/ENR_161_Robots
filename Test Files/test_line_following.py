@@ -32,8 +32,8 @@ def stop():
 
 def line_follow():
     # Variables and Tuning parameters
-    base_power = 255 #Default speed when on a 'true' straight line
-    kp = 30.0 # proportional gain
+    base_power = 100 #Default speed when on a 'true' straight line
+    kp = 70.0 # proportional gain
     ki = 0.0 # integral gain
     kd = 1.0 # derivative gain
     measured_ms = 5.6
@@ -76,7 +76,7 @@ def line_follow():
         # D = kd * error_rate
         steering_correction = (kp * line_error) + (ki * accumulated_integral) + (kd * error_rate)
         # This sets the steering speed bounds 
-        total_steering_correction = max(-255.0, min(255.0, steering_correction))
+        total_steering_correction = max(-200.0, min(200.0, steering_correction))
 
         # Applying the error to the speed of the motors
         left_motor_power = base_power - total_steering_correction

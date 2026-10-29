@@ -50,10 +50,15 @@ def stop():
 
 def figure8():
     # Constants
-    D = 40.64
-    W = 12.0
-    d_w = 6.2
-    base_RPM = 255
+    D = 20.32 # half the distance between circles
+    W = 11.95 * 0.5 # Accounting for the WheelBase Distance itself
+    d_w = 6.45
+    # Motor RPM Calcuations
+    base_motor_speed = 255
+    max_motor_speed = 225
+    max_rpm = 125
+    base_RPM = (base_motor_speed * max_rpm) / max_motor_speed
+    # Values are 0 to 255; max RPM is 125
 
     # Rpm Calculation for the inner wheel and outer wheels
     Rpm_inner = base_RPM * (1 - (W/D))
@@ -65,9 +70,9 @@ def figure8():
     # Main Figure 8 Loop
     mbot2.EM_set_speed(Rpm_inner, "EM1")
     mbot2.EM_set_speed(-(Rpm_outer), "EM2")
-    time.sleep(t)
+    time.sleep(t*2)
     mbot2.EM_set_speed(Rpm_outer, "EM1")
     mbot2.EM_set_speed(-(Rpm_inner), "EM2")
-    time.sleep(t)
+    time.sleep(t*2)
     mbot2.EM_set_speed(0, "EM1")
     mbot2.EM_set_speed(0, "EM2")

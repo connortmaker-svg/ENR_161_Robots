@@ -8,13 +8,16 @@ import mbuild
 def setup():
     cyberpi.console.clear()
     cyberpi.console.println("READY") #Prints in the console
-    cyberpi.display.show_label("READY", 16, 0, 0, 0)
+    time.sleep(1)
+    cyberpi.display.show_label("PRESS A to Start", 16, 0, 20, 1)
+    cyberpi.display.show_label("PRESS B to Stop", 16, 0, 20, 1)
 
 @event.is_press('a')
 def main():
-    cyberpi.display.show_label("PRESS A", 16, 0, 20, 1)
-    while not cyberpi.controller.is_press('a'):
-        pass
-
     mbot2.EM_set_speed(100, "EM1")
-    mbot2.EM_set_speed(100, "EM2")
+    mbot2.EM_set_speed(-100, "EM2")
+
+@event.is_press('b')
+def stop():
+    cyberpi.stop_all()
+    mbot2.EM_stop("all")

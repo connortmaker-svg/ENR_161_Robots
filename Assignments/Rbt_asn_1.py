@@ -19,11 +19,55 @@ def setup():
 
 @event.is_press('a')
 def main():
-    mbot2.EM_set_speed(100, "EM1")
-    mbot2.EM_set_speed(-100, "EM2")
+    figure8()
 
 @event.is_press('b')
 def stop():
     cyberpi.led.off()
     mbot2.EM_stop("all")
     cyberpi.stop_all()
+
+# RPM Outer = RPM * (1 + Wheelbase / Distance between circles)
+# RPM Inner = RPM * (1 - Wheelbase / Distance between Circles)
+# Time = (60 * Distance between circles ) / (RPM * Diameter of wheels)
+# Diameter of wheels = 6.2cm
+# Wheelbase = 12cm
+# Distance = 16 in (40.64 cm)
+
+# Speeds in RPM
+# speed_em1 = mbot2.encoder_motor.get_speed("EM1")
+# speed_em2 = mbot2.encoder_motor.get_speed("EM2")
+
+# Circle one
+# Set left motor to V_inner
+# Set right motor to V_outer
+# Delay for X time
+
+# Circle Two
+# Set left motor to V_outer
+# Set right motor to V_inner
+# Delay for X time
+
+def figure8():
+    # Constants
+    D = 40.64
+    W = 12.0
+    d_w = 6.2
+    base_RPM = 255
+
+    # Rpm Calculation for the inner wheel and outer wheels
+    Rpm_inner = base_RPM * (1 - (W/D))
+    Rpm_outer = base_RPM * (1 + (W/D))
+
+    # Time calucations
+    t = (60 * D) / (base_RPM * d_w)
+
+    # Main Figure 8 Loop
+    mbot2.EM_set_speed(Rpm_inner, "EM1")
+    mbot2.EM_set_speed(-(Rpm_outer), "EM2")
+    time.sleep(t)
+    mbot2.EM_set_speed(Rpm_outer, "EM1")
+    mbot2.EM_set_speed(-(Rpm_inner), "EM2")
+    time.sleep(t)
+    mbot2.EM_set_speed(0, "EM1")
+    mbot2.EM_set_speed(0, "EM2")

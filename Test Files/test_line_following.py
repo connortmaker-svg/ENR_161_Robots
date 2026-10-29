@@ -32,11 +32,12 @@ def stop():
 
 def line_follow():
     # Variables and Tuning parameters
-    base_power = 70 #Default speed when on a 'true' straight line
+    base_power = 255 #Default speed when on a 'true' straight line
     kp = 30.0 # proportional gain
     ki = 0.0 # integral gain
     kd = 1.0 # derivative gain
-    dt = 0.02 # loop period of the PID in seconds
+    measured_ms = 5.6
+    dt = measured_ms/1000.0 # loop period of the PID in seconds
 
     accumulated_integral = 0.0
     previous_error = 0.0
@@ -81,5 +82,3 @@ def line_follow():
         left_motor_power = base_power - total_steering_correction
         right_motor_power = -(base_power + total_steering_correction)
         mbot2.drive_power(left_motor_power, right_motor_power)
-
-        time.sleep(dt) 

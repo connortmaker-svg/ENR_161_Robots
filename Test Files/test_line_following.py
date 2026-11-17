@@ -32,10 +32,10 @@ def stop():
 
 def line_follow():
     # Variables and Tuning parameters
-    base_power = 100 #Default speed when on a 'true' straight line
-    kp = 70.0 # proportional gain
+    base_power = 90.0  #Default speed when on a 'true' straight line
+    kp = 95.0 # proportional gain
     ki = 0.0 # integral gain
-    kd = 1.0 # derivative gain
+    kd = 2.6# derivative gain
     measured_ms = 5.6
     dt = measured_ms/1000.0 # loop period of the PID in seconds
 

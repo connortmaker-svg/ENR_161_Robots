@@ -7,7 +7,7 @@ This is the engineering notebook that will house all the ideas, thoughts, and pl
 | Name | Email |
 | --- | --- |
 | Connor Klute | cklute@student.monroecc.edu |
-| Halal | Partners email | 
+| Jalaluddin | Jmohammadi1@student.monroecc.edu | 
 
 # Table of Contents
 

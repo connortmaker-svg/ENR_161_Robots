@@ -6,12 +6,8 @@ import mbuild
 
 @event.start
 def setup():
-    cyberpi.console.clear()
-    cyberpi.console.println("READY") #Prints in the console
-    cyberpi.console.clear()
-    time.sleep(1)
-    cyberpi.display.show_label("PRESS A to Start", 16, 0, 20, 1)
-    cyberpi.display.show_label("PRESS B to Stop", 16, 0, 20, 1)
+    cyberpi.display.show_label("A = GO", 16, 0, 0, 0)
+    cyberpi.display.show_label("B = STOP", 16, 0, 20, 1)
 
 left_m = "EM1"
 right_m = "EM2"
@@ -35,20 +31,25 @@ def line_follow():
     base_power = 90.0  #Default speed when on a 'true' straight line
     kp = 95.0 # proportional gain
     ki = 0.0 # integral gain
-    kd = 2.6# derivative gain
-    measured_ms = 5.6
-    dt = measured_ms/1000.0 # loop period of the PID in seconds
+    kd = 2.6 # derivative gain
 
     accumulated_integral = 0.0
     previous_error = 0.0
     last_seen_side = 1 # A value to rember if the line was seen to the left or the right via 
 
+    last_time = 0.0
     # Main Line following loop
     while True:
         # This is to get the sensor reading from the line. 
         line_state = mbuild.quad_rgb_sensor.get_line_sta("all", 1)
 
-        # Massive bit bang if the sensors loses the line by looking at the last know position
+        # Get th current time from the cyber pi. 
+        current_time = cyberpi.timer.get()
+        # Set the dt variable of the pid loop to the difference between the current time and last know time. 
+        dt = current_time - last_time
+        last_time = current_time
+
+        # Massive bang bang if the sensors loses the line by looking at the last know position
         if line_state == 0 or str(line_state) in ("0", "0000"):
             accumulated_integral = 0.0
             line_error = 1.0 * last_seen_side

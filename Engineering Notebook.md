@@ -37,7 +37,7 @@ completely within the center circle but may expand to any size during the trial.
 | 3D printing is allowed. If you don’t have your own 3D printer, some student clubs allow some amount of free printing (e.g., Engineering Leadership Council in 03-132). |
 | Scoring is defined as the appropriate color passing completely through the goal or preventing the goalie door from closing |
 
-<!-- -This is the photo of the course taken from the Competition Rule Book-->
+<!-- -This is the photo of the course taken from the Competition Rule Book- -->
 ![Figure 1](<Photos for Notebook/Figure 1.png>)
 
 

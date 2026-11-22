@@ -6,12 +6,8 @@ import mbuild
 
 @event.start
 def setup():
-    cyberpi.console.clear()
-    cyberpi.console.println("READY") #Prints in the console
-    cyberpi.console.clear()
-    time.sleep(1)
-    cyberpi.display.show_label("PRESS A to Start", 16, 0, 20, 1)
-    cyberpi.display.show_label("PRESS B to Stop", 16, 0, 20, 1)
+    cyberpi.display.show_label("A = GO", 16, 0, 0, 0)
+    cyberpi.display.show_label("B = STOP", 16, 0, 20, 1)
 
 @event.is_press('a')
 def main():
